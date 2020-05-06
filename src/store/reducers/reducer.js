@@ -1,14 +1,14 @@
 const initialState = {
-  expenses: [
-    { id: 1, name: "purchase1", amount: 1000, date: "28/04/2020" },
-    { id: 2, name: "purchase2", amount: 50, date: "28/04/2020" },
-    { id: 3, name: "purchase3", amount: -10, date: "28/04/2020" },
-    { id: 4, name: "purchase4", amount: 10, date: "28/04/2020" },
-  ],
+  expenses: [],
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case "ADD_ALL_EXPENSES":
+      return {
+        ...state,
+        expenses: [...action.payload, ...state.expenses],
+      };
     case "ADD_EXPENSE":
       return {
         ...state,

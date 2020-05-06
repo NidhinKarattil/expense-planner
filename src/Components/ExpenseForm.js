@@ -9,7 +9,6 @@ class Expenseform extends Component {
     date: "",
     isNameValid: false,
     isAmountValid: false,
-    expenseArray: [],
   };
 
   nameChangeHandler = (e) => {
@@ -33,7 +32,6 @@ class Expenseform extends Component {
       this.props.type === "spending"
         ? this.state.amount * -1
         : this.state.amount * 1;
-    
 
     let newExpense = {
       id: Math.floor(Math.random() * 100000000),
@@ -41,10 +39,7 @@ class Expenseform extends Component {
       amount: signedAmount,
       date: this.state.date,
     };
-    console.log(this.state.expenseArray);
-    this.setState({ expenseArray: this.state.expenseArray.push(newExpense) });
-    localStorage.setItem("expense", JSON.stringify(this.state.expenseArray));
-    console.log(this.state.expenseArray);
+
     this.props.addExpense(newExpense);
     this.setState({
       name: "",
@@ -52,8 +47,16 @@ class Expenseform extends Component {
       isNameValid: false,
       isAmountValid: false,
     });
+
     this.props.clicked();
   };
+  componentDidMount() {
+    console.log("didmount form");
+  }
+
+  componentDidUpdate() {
+    console.log("didupdate form");
+  }
   render() {
     return (
       <form onSubmit={this.submitHandler}>
@@ -84,6 +87,12 @@ class Expenseform extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    expenseArray: state.expenses,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addExpense: (newExpense) =>
@@ -91,4 +100,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Expenseform);
+export default connect(mapStateToProps, mapDispatchToProps)(Expenseform);

@@ -9,7 +9,7 @@ export function SingleExpense(props) {
       <div>
         <p>{props.expense.date}</p>
         <h3 className={props.expense.amount > 0 ? "income" : "spending"}>
-          {expenceAmount} Kc
+          Rs. {expenceAmount}
         </h3>
       </div>
       <div>{props.expense.name}</div>

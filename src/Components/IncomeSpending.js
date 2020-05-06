@@ -11,8 +11,8 @@ export default function IncomeSpending({ amounts }) {
 
   return (
     <div className="spendings">
-      <p className="income">Income: {income} kc</p>
-      <p className="spending">Spending: {spendings} kc</p>
+      <p className="income">Income: Rs. {income} </p>
+      <p className="spending">Spending: Rs. {spendings} </p>
     </div>
   );
 }

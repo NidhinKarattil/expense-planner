@@ -13,7 +13,7 @@ class Heading extends Component {
     return (
       <header className="header">
         <p>Balance</p>
-        <h2 className="balance">{totalBalance} CZK</h2>
+        <h2 className="balance">Rs. {totalBalance}</h2>
         <IncomeSpending amounts={amounts}></IncomeSpending>
       </header>
     );

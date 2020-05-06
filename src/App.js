@@ -4,6 +4,7 @@ import Heading from "./Components/Heading";
 import Expenses from "./Components/Expenses";
 import AddAndRemoveExpense from "./Components/AddAndRemoveExpense";
 import ExpenseForm from "./Components/ExpenseForm";
+import { connect } from "react-redux";
 
 class App extends Component {
   state = {
@@ -16,6 +17,17 @@ class App extends Component {
       expenseType: type,
     });
   };
+  componentDidMount() {
+    console.log("didmount App");
+    let savedExpenses = JSON.parse(localStorage.getItem("expenses"));
+    this.props.addExpense(savedExpenses);
+    console.log(savedExpenses);
+  }
+  componentDidUpdate() {
+    console.log(this.props.expenses);
+    localStorage.setItem("expenses", JSON.stringify(this.props.expenses));
+    console.log("didupdate App");
+  }
   render() {
     return (
       <div className="App">
@@ -34,5 +46,17 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    expenses: state.expenses,
+  };
+};
 
-export default App;
+const mapDidspatchToProps = (dispatch) => {
+  return {
+    addExpense: (newExpense) =>
+      dispatch({ type: "ADD_ALL_EXPENSES", payload: newExpense }),
+  };
+};
+
+export default connect(mapStateToProps, mapDidspatchToProps)(App);
